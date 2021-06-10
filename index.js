@@ -47,7 +47,7 @@ let persons = [
     ]
 
 app.get('/', (request, response) => {
-    response.send(`<p><strong>/info</strong> for info</p> <p><strong>/api/persons</strong> for json</p> }`)
+    response.send(`<p><strong>/info</strong> for info</p> <p><strong>/api/persons</strong> for json</p>`)
     })
 
 
