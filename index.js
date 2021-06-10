@@ -23,6 +23,11 @@ let persons = [
         name: "Mary Poppendieck",
         number: "39-23-6423122",
         id: 4
+      },
+      {
+        name: "Test name",
+        number: "39-23-6423122",
+        id: 5
       }
     ]
 
@@ -57,12 +62,21 @@ app.delete('/api/persons/:id', (request, response) => {
 app.post('/api/persons/', (request, response) => {
     const body = request.body
 
-    if (!body.name) {
+    if (!body.name || !body.number) {
         return response.status(400).json({ 
-          error: 'content missing' 
+          error: 'both name and number must be included' 
         })
       }
 
+    const exists = persons.find(per => per.name === body.name)
+
+    if (exists) {
+        return response.status(400).json({ 
+            error: "name must be unique"
+          })
+    }
+    
+    
     const person = {
         name: body.name,
         number: body.number,
